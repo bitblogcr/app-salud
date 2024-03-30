@@ -1,0 +1,57 @@
+@{
+    ViewData["Title"] = "Personas";
+}
+
+<h2>Usuarios</h2>
+<br>
+
+<div class="row">
+    <div class="col-md-12">
+        <a asp-action="Create" asp-controller="Persona" class="btn btn-success"> + Agregar usuario</a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>User ID</td>
+                    <td>Nombre</td>
+                    <td>Nombre completo</td>
+                    <td>Correo electrónico</td>
+                    <td>Fecha de Nacimiento</td>
+                    <td>Altura</td>
+                    <td>Peso Actual</td>
+                    <td>Género</td>
+                    <td>Foto de Perfil</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Nombre</td>
+                        <td>@item.NombreCompleto</td>
+                        <td>@item.CorreoElectronico</td>
+                        <td>@item.FechaNacimiento</td>
+                        <td>@item.Altura</td>
+                        <td>@item.PesoActual</td>
+                        <td>@item.Genero</td>
+                        <td>
+                            @if (item.FotoPerfil != null && item.FotoPerfil.Length > 0)
+                            {
+                                <img src="data:image;base64,@Convert.ToBase64String(item.FotoPerfil)" alt="Foto de Perfil" style="max-width: 100px; max-height: 100px;" />
+                            }
+                            else
+                            {
+                                <span>No hay foto de perfil</span>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
