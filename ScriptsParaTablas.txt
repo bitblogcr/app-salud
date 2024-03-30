@@ -1,0 +1,57 @@
+Bases de Datos
+
+Personas:
+
+CREATE TABLE [dbo].[Personas](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Nombre] [nvarchar](max) NOT NULL,
+	[CorreoElectronico] [nvarchar](100) NULL,
+	[Contraseña] [nvarchar](255) NULL,
+	[NombreCompleto] [nvarchar](100) NULL,
+	[FechaNacimiento] [date] NULL,
+	[Altura] [decimal](5, 2) NULL,
+	[PesoActual] [decimal](5, 2) NULL,
+	[Genero] [nvarchar](20) NULL,
+	[FotoPerfil] [varbinary](max) NULL,
+	[Salt] [nvarchar](128) NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+
+Metas:
+
+CREATE TABLE [dbo].[MetaSalud](
+	[ID_MetaSalud] [int] IDENTITY(1,1) NOT NULL,
+	[ID_Usuario] [int] NOT NULL,
+	[TipoMeta] [varchar](15) NOT NULL,
+	[PesoObjetivo] [decimal](10, 2) NOT NULL,
+	[FechaObjetivo] [date] NOT NULL,
+	[NivelActiFisica] [varchar](20) NOT NULL,
+	[ObjetivosEspecificos] [text] NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY] 
+
+Dieta:
+
+CREATE TABLE [dbo].[Dieta](
+	[ID_RegistroDieta] [int] NOT NULL,
+	[ID_Usuario] [int] NULL,
+	[FechaComida] [date] NULL,
+	[TipoComida] [varchar](50) NULL,
+	[AlimentosConsumidos] [varchar](max) NULL,
+	[CaloriasComida] [int] NULL,
+	[Comentarios] [nvarchar](max) NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+Actividad:
+
+CREATE TABLE [dbo].[Actividad] (
+    [ID_RegistroActividad] INT            NOT NULL,
+    [ID_Usuario]           INT            NULL,
+    [TipoActividad]        NVARCHAR (100) NULL,
+    [FechaHoraActividad]   DATETIME       NULL,
+    [Duracion]             INT            NULL,
+    [DistanciaRecorrida]   DECIMAL (8, 2) NULL,
+    [CaloriasQuemadas]     INT            NULL,
+    [Comentarios]          NVARCHAR (MAX) NULL,
+    PRIMARY KEY CLUSTERED ([ID_RegistroActividad] ASC),
+    FOREIGN KEY ([ID_Usuario]) REFERENCES [dbo].[Personas] ([Id])
+); 
